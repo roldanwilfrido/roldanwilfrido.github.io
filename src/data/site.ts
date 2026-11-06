@@ -78,8 +78,8 @@ export const notes = [
 export const experience = [
   {
     company: 'Real Time Networks Inc.', role: 'Senior Java Developer', period: 'Apr 2023 — Oct 2026', place: 'Canada · Remote',
-    summary: 'Developed Java/Spring Boot services and integrations for cloud and on-premises enterprise products. Contributed to architecture trade-off discussions, code reviews, tests, production troubleshooting, and mentoring.',
-    tech: 'Java 11/17 · Spring Boot · AWS · PostgreSQL · SQL Server · DynamoDB · Docker',
+    summary: 'Developed Java/Spring Framework backend services and REST APIs for enterprise products, using JdbcTemplate for database access, Spring Data JPA for persistence, and Spring Scheduling for background jobs. Contributed to architecture discussions, code reviews, testing, troubleshooting, and documentation.',
+    tech: 'Java 11/17 · Spring Framework · JdbcTemplate · Spring Scheduling · REST APIs · Spring Data JPA · SQL Server · Docker',
   },
   {
     company: 'Avenue Code (GAP)', role: 'Software Developer', period: 'Nov 2021 — Feb 2023', place: 'Remote · US client',
