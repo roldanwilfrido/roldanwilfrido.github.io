@@ -1,0 +1,9 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import {notes} from '../../data/site';
+---
+<SiteLayout title="Engineering Journal" eyebrow="Notes / Ideas">
+  <section class="page-hero"><div class="kicker">Explore · Explain · Apply</div><h1>Notes from the<br /><em>engineering desk.</em></h1><p class="lead">I learn best by making an idea precise enough to explain, test, and apply. Here are short notes on correctness, Java, APIs, and system design.</p></section><div class="interlude"></div>
+  <div class="simple-list">{notes.map(note => <a class="simple-item" href={note.href}><span class="item-tag">{note.tag}</span><div><div class="simple-title">{note.title}</div><p class="simple-desc">{note.excerpt} · {note.read}</p></div><span class="item-arrow" aria-hidden="true">↗</span></a>)}</div>
+  <section class="section"><p class="muted">These notes are educational explanations and working principles—not disclosures of client systems or proprietary employer code.</p></section>
+</SiteLayout>

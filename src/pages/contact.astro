@@ -1,0 +1,9 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import {profile} from '../data/site';
+---
+<SiteLayout title="Contact" eyebrow="Contact / Connect">
+  <section class="page-hero"><div class="kicker">Available for thoughtful conversations</div><h1>Let's build<br /><em>something useful.</em></h1><p class="lead">I'm based in London, Ontario, Canada, and open to remote senior backend engineering opportunities—including teams working in Java, Spring Boot, AWS, and distributed systems. I'm also happy to connect about open source and technical ideas.</p></section>
+  <div class="interlude"></div><div class="contact-grid"><a class="contact-tile" href={`mailto:${profile.email}`}><span>01 / EMAIL</span><strong>{profile.email}</strong><small>Get in touch ↗</small></a><a class="contact-tile" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><span>02 / LINKEDIN</span><strong>Professional profile</strong><small>Connect on LinkedIn ↗</small></a><a class="contact-tile" href={profile.github} target="_blank" rel="noopener noreferrer"><span>03 / GITHUB</span><strong>Code & open source</strong><small>View my repositories ↗</small></a><a class="contact-tile" href="/experience/"><span>04 / BACKGROUND</span><strong>Experience & skills</strong><small>Read my career summary ↗</small></a></div>
+  <section class="section"><p class="muted">This website does not have analytics, advertising, a contact database, or a public contact form. Email and external profile links are provided directly.</p></section>
+</SiteLayout>

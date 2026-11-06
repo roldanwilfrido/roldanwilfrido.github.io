@@ -1,0 +1,21 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/site';
+const personalProjects = projects.filter(project => project.kind === 'personal');
+const openSourceProjects = projects.filter(project => project.kind === 'open-source');
+---
+<SiteLayout title="Projects" eyebrow="Projects / Personal & Open Source">
+  <section class="page-hero"><div class="kicker">Build things that are useful</div><h1>Work worth<br /><em>sharing.</em></h1><p class="lead">A personal website I am actively rebuilding, alongside two smaller open-source ideas I plan to develop. I care about useful functionality, clear architecture, privacy, and reliable software—without confusing a roadmap with completed work.</p></section>
+  <div class="interlude"></div>
+  <section class="section" aria-labelledby="personal-projects">
+    <div class="section-head"><div><div class="kicker">Building independently</div><h2 id="personal-projects">Personal projects.</h2></div></div>
+    <div class="project-grid">{personalProjects.map(project => <ProjectCard project={project} />)}</div>
+  </section>
+  <section class="section" aria-labelledby="open-source-projects">
+    <div class="section-head"><div><div class="kicker">In the pipeline</div><h2 id="open-source-projects">Open-source roadmap.</h2></div></div>
+    <div class="project-grid">{openSourceProjects.map(project => <ProjectCard project={project} />)}</div>
+  </section>
+  <section class="section"><div class="kicker">Project principles</div><h2 class="section-title">Small scope. Real rigor.</h2><div class="detail-grid" style="margin-top:25px"><div class="detail-card"><h3>Useful by default</h3><p>A working core, clear setup instructions, and realistic examples should come before optional infrastructure.</p></div><div class="detail-card"><h3>Intentional complexity</h3><p>Transactions and unique constraints belong in the core. Event streaming and distributed workflows should be added only when they solve a real need.</p></div></div></section>
+  <p class="notice">SanidApp is an active independent project with a private source repository; its existing public website is a separate, earlier version. The two open-source tools are planned and do not yet have public demos.</p>
+</SiteLayout>

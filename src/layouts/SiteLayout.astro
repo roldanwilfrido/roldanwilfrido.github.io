@@ -1,0 +1,80 @@
+---
+import { profile, nav } from '../data/site';
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+}
+const { title, description = 'The engineering portfolio of Roldan Ortiz Molinares, Senior Backend Engineer specializing in Java, Spring Boot, AWS, and reliable APIs.', eyebrow } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+const fullTitle = title === 'Home' ? `${profile.name} — Senior Backend Engineer` : `${title} · ${profile.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#152f3e" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://roldanwilfrido.github.io/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{fullTitle}</title>
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') || 'light';
+      } catch (_) { document.documentElement.dataset.theme = 'light'; }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <aside class="sidebar" aria-label="Profile and navigation">
+      <div class="sidebar-top">
+        <a class="brand" href="/" aria-label="Roldan Ortiz Molinares — home">
+          <span class="brand-mark">R<span class="brand-dot">.</span></span>
+          <span class="brand-label">ROLDAN<br />ORTIZ MOLINARES</span>
+        </a>
+        <div class="sidebar-intro">
+          <div class="portrait" aria-hidden="true"><span>RO</span><i></i></div>
+          <div class="sidebar-name">Senior Backend<br /><em>Engineer.</em></div>
+          <p>Thoughtful software design.<br />Reliable backend systems.</p>
+        </div>
+        <nav class="primary-nav" aria-label="Main navigation">
+          {nav.map(item => <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]} aria-current={isActive(item.href) ? 'page' : undefined}><span class="nav-num">{item.number}</span>{item.label}<span class="nav-arrow">↗</span></a>)}
+        </nav>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="availability"><span class="live-dot"></span> Open to remote opportunities</div>
+        <p>Based in London, Ontario<br />Working across borders.</p>
+        <div class="side-socials"><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+      </div>
+    </aside>
+    <div class="mobile-head">
+      <a class="mobile-brand" href="/">R<span>.</span> <strong>Roldan Ortiz Molinares</strong></a>
+      <details class="mobile-menu">
+        <summary aria-label="Toggle navigation">Menu <span aria-hidden="true">☰</span></summary>
+        <nav aria-label="Mobile navigation">{nav.map(item => <a href={item.href}>{item.label}</a>)}</nav>
+      </details>
+    </div>
+    <div class="shell">
+      <div class="topline"><span>ENGINEERING PORTFOLIO <span class="sep">/</span> {eyebrow ?? '2026'}</span><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme"><span aria-hidden="true">◐</span> <span>Theme</span></button></div>
+      <main id="main"><slot /></main>
+      <footer class="site-footer"><span>© {new Date().getFullYear()} Roldan Ortiz Molinares</span><span>Built with Astro · Hosted on GitHub Pages</span><a href="/contact/">Let's connect ↗</a></footer>
+    </div>
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = theme;
+        try { localStorage.setItem('portfolio-theme', theme); } catch (_) {}
+      });
+    </script>
+  </body>
+</html>

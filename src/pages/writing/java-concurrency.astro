@@ -1,0 +1,21 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="A practical path through Java concurrency" eyebrow="Writing / Java">
+  <section class="page-hero compact"><p class="crumb"><a href="/writing/">Engineering Journal</a> / Java</p><h1>A practical path through <em>Java concurrency.</em></h1><div class="post-meta"><span>Java 21</span><span>6 min read</span><span>Learning note</span></div></section><div class="interlude"></div>
+  <article class="page-content prose">
+    <p>Concurrency starts as a performance topic, but quickly becomes a correctness topic. When multiple threads, requests, or workers touch the same state, the interesting question isn't simply how many can run at once. It's which outcomes are valid.</p>
+    <h2>1. Begin with a shared-state race</h2><p>A read-modify-write operation can lose updates even when individual reads and writes are safe. In-memory locks may help within one process, but they do not automatically coordinate separate application instances.</p>
+    <pre><code>// Conceptual example: not safe as a combined operation
+int current = counter.get();
+counter.set(current + 1);</code></pre>
+    <p>Compare that with an atomic increment, then ask whether the real resource lives in memory, in a relational database, or across services. The answer changes the solution.</p>
+    <h2>2. Distinguish locks from transactions</h2><p>Java <code>synchronized</code> and <code>ReentrantLock</code> coordinate threads in one JVM. A database transaction coordinates changes to persisted data according to its isolation rules. Optimistic locking—often via a version column—can detect conflicting updates without locking every record for the entire operation.</p>
+    <h2>3. Make cancellation and timeouts intentional</h2><p>A background task needs a clear lifecycle: who owns it, what happens when the caller disconnects, how long it can run, and what state remains after failure. Thread pools and <code>CompletableFuture</code> offer composition tools, but they don't automatically provide durable work queues.</p>
+    <h2>4. Understand Java 21 virtual threads</h2><p>Virtual threads can simplify high-concurrency applications with many blocking I/O operations. They're not a way to make CPU-heavy tasks faster, and database connection pools or downstream service limits still impose real constraints. Measure first.</p>
+    <h2>5. Test overlapping operations</h2><p>Concurrent tests should deliberately coordinate workers to reproduce interleavings, rather than hoping a race occurs during a fast test run. For database behavior, use integration tests against the actual database engine and verify final invariants.</p>
+    <blockquote>Concurrency is a design problem before it is a threading API problem.</blockquote>
+    <p>My learning plan is to start with duplicate job submissions in the Job Tracker, then use the Webhook Inbox project to study retries, ordering, worker coordination, and idempotent event processing.</p>
+    <p><a class="text-link" href="/writing/">← All writing</a></p>
+  </article>
+</SiteLayout>

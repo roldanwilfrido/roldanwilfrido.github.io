@@ -1,0 +1,10 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import {experience} from '../data/site';
+---
+<SiteLayout title="Experience" eyebrow="Career / Experience">
+  <section class="page-hero"><div class="kicker">Built through real-world delivery</div><h1>More than code.<br /><em>Better decisions.</em></h1><p class="lead">Over 14 years working on enterprise software, financial systems, integrations, and backend delivery. I like roles where I can stay hands-on while helping a team make sound technical choices.</p></section><div class="interlude"></div>
+  <div class="timeline">{experience.map(job => <section class="career"><div class="career-period">{job.period}<br />{job.place}</div><div><h2>{job.company}</h2><h3>{job.role}</h3><p>{job.summary}</p><p class="tech">{job.tech}</p></div></section>)}</div>
+  <section class="section"><div class="kicker">Toolbox</div><h2 class="section-title">Technologies I work with.</h2><div class="detail-grid" style="margin-top:25px"><div class="detail-card"><h3>Backend</h3><p>Java 11/17, Spring Boot, Spring MVC, REST APIs, JPA/Hibernate, microservices, integration design.</p></div><div class="detail-card"><h3>Cloud & messaging</h3><p>AWS Lambda, API Gateway, S3, DynamoDB, Docker, Kafka and RabbitMQ integration work.</p></div><div class="detail-card"><h3>Data</h3><p>PostgreSQL, SQL Server, Oracle, MongoDB, query optimization, and database-backed services.</p></div><div class="detail-card"><h3>Engineering practice</h3><p>JUnit, Mockito, MockMvc, CI/CD, code reviews, performance troubleshooting, mentoring, and architecture proofs of concept.</p></div></div></section>
+  <section class="section"><div class="kicker">Education & development</div><h2 class="section-title">An engineer, always learning.</h2><p class="lead" style="margin-top:20px">Computer Science Engineer — Universidad Autónoma del Caribe (WES-verified bachelor's degree). AWS Cloud Practitioner Essentials training. Languages: Spanish (native) and English (professional working proficiency).</p></section>
+</SiteLayout>

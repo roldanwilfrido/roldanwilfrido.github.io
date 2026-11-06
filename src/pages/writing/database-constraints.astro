@@ -1,0 +1,20 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="Preventing duplicate requests starts in the database" eyebrow="Writing / Correctness">
+  <section class="page-hero compact"><p class="crumb"><a href="/writing/">Engineering Journal</a> / Correctness</p><h1>Preventing duplicate requests <em>starts in the database.</em></h1><div class="post-meta"><span>Java & PostgreSQL</span><span>5 min read</span><span>Learning note</span></div></section><div class="interlude"></div>
+  <article class="page-content prose">
+    <p>Suppose a job seeker pastes an application link into a tracker. The service checks whether it exists, then inserts a new record. The implementation appears safe: check first, insert second. Yet two nearly simultaneous requests can still create a duplicate.</p>
+    <h2>The race</h2><p>Request A checks the database and finds nothing. Request B checks a moment later, before A commits, and also finds nothing. Both attempt the insert. An application-level <code>existsBy...</code> check by itself cannot guarantee uniqueness under concurrency.</p>
+    <h2>Put the invariant where the data lives</h2><p>If your business rule says an owner can only track a requisition once, enforce it with a database constraint.</p>
+    <pre><code>CREATE UNIQUE INDEX ux_application_owner_job
+ON applications (owner_id, company_id, job_key);</code></pre>
+    <p>Here, <code>job_key</code> should be an intentionally normalized identifier—not a raw URL containing tracking parameters that make duplicates appear different.</p>
+    <p>The transaction then attempts the insert. One request wins; the other receives a uniqueness violation that the API can translate into a useful conflict response, or into an idempotent response if the product's semantics warrant it.</p>
+    <h2>Idempotency and uniqueness are related, not identical</h2><p>A unique constraint protects a stored invariant. An idempotency key protects repeated *operations*, including cases where a client retries because the network connection dropped after a successful write. A robust API may need both, depending on the action.</p>
+    <h2>What I'd test</h2><ul><li>Two concurrent requests using the same canonical job identifier.</li><li>Different identifiers that should normalize to the same requisition.</li><li>Retries after a response is lost.</li><li>Unexpected database errors and the resulting HTTP response.</li></ul>
+    <blockquote>Correctness is easier to reason about when the database and the API agree on what must never happen.</blockquote>
+    <p>This is one design decision I plan to explore in the open-source Job Tracker, with reproducible concurrent integration tests.</p>
+    <p><a class="text-link" href="/writing/">← All writing</a></p>
+  </article>
+</SiteLayout>

@@ -1,0 +1,42 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import {projects, notes, profile} from '../data/site';
+---
+<SiteLayout title="Home">
+  <section class="hero">
+    <div class="kicker">Hello, I'm Roldan · Senior Backend Engineer</div>
+    <h1>Engineering the<br /><em>quietly reliable.</em></h1>
+    <div class="hero-body">
+      <div>
+        <p class="lead">I build and improve the systems behind great products. With 14+ years in Java and backend engineering, I care about clear APIs, useful architecture, and software that behaves well when things get complicated.</p>
+        <div class="hero-links"><a class="btn btn-primary" href="/projects/">Explore my work <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="/contact/">Get in touch</a></div>
+      </div>
+      <div class="hero-deco" aria-hidden="true">R.</div>
+    </div>
+  </section>
+  <div class="metrics" aria-label="Career highlights">
+    <div class="metric"><strong>14<span style="display:inline;color:var(--accent)">+</span></strong><span>Years building software</span></div>
+    <div class="metric"><strong>Java <span style="display:inline;font-size:.6em;color:var(--accent)">/</span> AWS</strong><span>Core engineering toolkit</span></div>
+    <div class="metric"><strong>~70%</strong><span>Processing-time reduction in a banking service</span></div>
+  </div>
+  <section class="section" aria-labelledby="selected-work">
+    <div class="section-head"><div><div class="kicker">Learning by building</div><h2 id="selected-work">Selected work<span style="color:var(--accent)">.</span></h2></div><a class="text-link" href="/projects/">All projects ↗</a></div>
+    <div class="project-grid">{projects.map(project => <ProjectCard project={project} />)}</div>
+    <p class="footnote" style="margin-top:14px">SanidApp is an active personal project; the Java tools shown here are upcoming open-source work. See each project for its current status.</p>
+  </section>
+  <section class="section" aria-labelledby="what-i-do">
+    <div class="section-head"><div><div class="kicker">How I work</div><h2 id="what-i-do">Backend craft, not buzzwords.</h2></div></div>
+    <div class="detail-grid">
+      <div class="detail-card"><h3>Design for change</h3><p>Use small, understandable boundaries; compare alternatives with proofs of concept; document the trade-offs that matter.</p></div>
+      <div class="detail-card"><h3>Protect correctness</h3><p>Make data and APIs reliable through validation, testing, transaction discipline, and careful failure handling.</p></div>
+      <div class="detail-card"><h3>See the whole system</h3><p>Connect business requirements, backend services, cloud integrations, databases, and operational realities.</p></div>
+      <div class="detail-card"><h3>Work together</h3><p>Translate ambiguous goals into useful plans and collaborate across product, QA, frontend, DevOps, and engineering teams.</p></div>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="recent-writing">
+    <div class="section-head"><div><div class="kicker">Notes from the engineering desk</div><h2 id="recent-writing">Thinking in public.</h2></div><a class="text-link" href="/writing/">View the journal ↗</a></div>
+    <div class="simple-list">{notes.map(note => <a class="simple-item" href={note.href}><span class="item-tag">{note.tag}</span><div><div class="simple-title">{note.title}</div><p class="simple-desc">{note.excerpt}</p></div><span class="item-arrow" aria-hidden="true">↗</span></a>)}</div>
+  </section>
+  <section class="split-panel"><div><div class="kicker">A little about me</div><h2>Experienced.<br />Still curious.</h2></div><div><p>My career spans banking, enterprise software, and cloud integrations. I'm happiest solving practical backend problems and sharing what I learn along the way. I live in London, Ontario, and work comfortably with distributed teams.</p><a class="btn" href="/experience/">See my experience <span aria-hidden="true">↗</span></a></div></section>
+</SiteLayout>

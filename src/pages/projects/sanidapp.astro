@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+---
+<SiteLayout title="SanidApp — Personal Project" eyebrow="Project 01 · Personal">
+  <section class="page-hero compact">
+    <div class="kicker">Independent personal project / Multilingual web / Accessibility</div>
+    <h1>SanidApp.<br /><em>Content with care.</em></h1>
+    <p class="lead">Rebuilding an existing faith-based website as a fast, maintainable multilingual experience—while learning more about static architecture, content pipelines, deployment, accessibility, and privacy.</p>
+  </section>
+  <p class="pill">Active rebuild · private source</p>
+  <div class="interlude"></div>
+  <div class="page-content prose">
+    <h2>What the project does</h2>
+    <p>SanidApp brings together devotional articles, Bible-related study material, and educational content for a general audience. I am evolving an existing Spanish-language website into a responsive experience in <strong>Spanish, English, and French</strong>, with structured content and consistent navigation.</p>
+    <h2>Engineering approach</h2>
+    <ul>
+      <li><strong>Static-first:</strong> Astro pages and TypeScript-backed content structures reduce operational complexity and avoid an unnecessary application database.</li>
+      <li><strong>Cloud architecture:</strong> AWS S3 and CloudFront are the intended hosting and delivery stack for the rebuilt site; they are not described here as a completed deployment.</li>
+      <li><strong>Quality:</strong> automated tests and build checks cover content, links, SEO, accessibility, privacy, and release readiness. A recent local validation run passed more than 1,200 tests.</li>
+      <li><strong>Privacy and performance:</strong> no analytics are planned, embedded video uses click-to-load behavior, and local storage is limited to useful preferences and progress.</li>
+      <li><strong>Content integrity:</strong> content migration and image licensing are reviewed deliberately, with multilingual text and attribution checks.</li>
+    </ul>
+    <h2>What I have built, and what comes next</h2>
+    <p>The rebuild already includes a substantial collection of multilingual pages and automated quality checks. Additional educational games and content experiences are planned and evolving. The new architecture is still being prepared for release, so this portfolio does not present it as a fully launched replacement.</p>
+    <p>The <a class="text-link" href="https://sanidapp.com" target="_blank" rel="noopener noreferrer">existing SanidApp website ↗</a> can be visited publicly. It is the earlier version, not a demo of the new Astro build.</p>
+    <div class="notice">This is my independent personal project, separate from my professional employment. Its development repository is private and is not offered as an open-source download.</div>
+    <p><a class="text-link" href="/projects/">← Back to projects</a></p>
+  </div>
+</SiteLayout>
